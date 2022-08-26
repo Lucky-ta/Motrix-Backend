@@ -29,8 +29,17 @@ const destroySubject = async (id: number) => {
   } return { status: 400 };
 };
 
+const updateSubject = async (id: number, subject: SubjectShape) => {
+  const updatedSubject = await Subjects.update(subject, { where: { id } });
+
+  if (updatedSubject !== null) {
+    return { status: 200, data: updatedSubject };
+  } return { status: 400, data: { message: 'Error' } };
+};
+
 export {
   getSubjects,
   createSubject,
   destroySubject,
+  updateSubject,
 };
