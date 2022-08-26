@@ -1,10 +1,12 @@
 import { Router } from 'express';
-import { getAllSubjects, postSubject } from '../controllers/subjectControllers';
+import { deleteSubject, getAllSubjects, postSubject } from '../controllers/subjectControllers';
 
 const subjectRouter = Router();
 
 subjectRouter.get('/', getAllSubjects);
 
 subjectRouter.post('/', postSubject);
+
+subjectRouter.delete('/:id', deleteSubject);
 
 export default subjectRouter;

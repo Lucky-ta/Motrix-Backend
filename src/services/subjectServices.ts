@@ -21,7 +21,16 @@ const createSubject = async (subject: SubjectShape) => {
   } return { status: 400, data: { message: 'Error' } };
 };
 
+const destroySubject = async (id: number) => {
+  const excludeSubject = await Subjects.destroy({ where: { id } });
+
+  if (excludeSubject !== null) {
+    return { status: 200 };
+  } return { status: 400 };
+};
+
 export {
   getSubjects,
   createSubject,
+  destroySubject,
 };

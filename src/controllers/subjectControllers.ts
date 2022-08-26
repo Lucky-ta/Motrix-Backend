@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createSubject, getSubjects } from '../services/subjectServices';
+import { createSubject, destroySubject, getSubjects } from '../services/subjectServices';
 
 const getAllSubjects = async (req: Request, res: Response) => {
   try {
@@ -20,7 +20,20 @@ const postSubject = async (req: Request, res: Response) => {
   }
 };
 
+const deleteSubject = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const parsedId = Number(id);
+
+    const response = await destroySubject(parsedId);
+    return res.status(response.status).end();
+  } catch (e: any) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
 export {
   getAllSubjects,
   postSubject,
+  deleteSubject,
 };
