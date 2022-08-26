@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { getAllSubjects } from '../controllers/subjectControllers';
+import { getAllSubjects, postSubject } from '../controllers/subjectControllers';
 
 const subjectRouter = Router();
 
 subjectRouter.get('/', getAllSubjects);
+
+subjectRouter.post('/', postSubject);
 
 export default subjectRouter;

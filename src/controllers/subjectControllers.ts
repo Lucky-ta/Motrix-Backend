@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getSubjects } from '../services/subjectServices';
+import { createSubject, getSubjects } from '../services/subjectServices';
 
 const getAllSubjects = async (req: Request, res: Response) => {
   try {
@@ -10,6 +10,17 @@ const getAllSubjects = async (req: Request, res: Response) => {
   }
 };
 
+const postSubject = async (req: Request, res: Response) => {
+  try {
+    const { body } = req;
+    const response = await createSubject(body);
+    return res.status(response.status).json(response.data);
+  } catch (e: any) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
 export {
   getAllSubjects,
+  postSubject,
 };
