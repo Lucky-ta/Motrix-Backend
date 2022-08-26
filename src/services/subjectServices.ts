@@ -37,9 +37,18 @@ const updateSubject = async (id: number, subject: SubjectShape) => {
   } return { status: 400, data: { message: 'Error' } };
 };
 
+const getSubject = async (subjectId: number) => {
+  const subjects = await Subjects.findByPk(subjectId);
+
+  if (subjects !== null) {
+    return { status: 200, data: subjects };
+  } return { status: 400, data: { message: 'Error' } };
+};
+
 export {
   getSubjects,
   createSubject,
   destroySubject,
   updateSubject,
+  getSubject,
 };

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import {
   createSubject,
   destroySubject,
+  getSubject,
   getSubjects,
   updateSubject,
 } from '../services/subjectServices';
@@ -50,9 +51,22 @@ const editSubject = async (req: Request, res: Response) => {
   }
 };
 
+const getSubjectsById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const parsedId = Number(id);
+
+    const response = await getSubject(parsedId);
+    return res.status(response.status).json(response.data);
+  } catch (e: any) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
 export {
   getAllSubjects,
   postSubject,
   deleteSubject,
   editSubject,
+  getSubjectsById,
 };
