@@ -6,15 +6,28 @@ import {
   getSubjectsById,
   postSubject,
 } from '../controllers/subjectControllers';
+import { descriptionValidate, nameValidate } from '../middlewares/subjectsMidllewares';
 
 const subjectRouter = Router();
 
 subjectRouter.get('/', getAllSubjects);
 subjectRouter.get('/:id', getSubjectsById);
 
-subjectRouter.post('/', postSubject);
+subjectRouter.post(
+  '/',
+  nameValidate,
+  descriptionValidate,
 
-subjectRouter.put('/:id', editSubject);
+  postSubject,
+);
+
+subjectRouter.put(
+  '/:id',
+  nameValidate,
+  descriptionValidate,
+
+  editSubject,
+);
 
 subjectRouter.delete('/:id', deleteSubject);
 
