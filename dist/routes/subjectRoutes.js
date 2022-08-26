@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const subjectControllers_1 = require("../controllers/subjectControllers");
+const subjectsMidllewares_1 = require("../middlewares/subjectsMidllewares");
+const subjectRouter = (0, express_1.Router)();
+subjectRouter.get('/', subjectControllers_1.getAllSubjects);
+subjectRouter.get('/:id', subjectControllers_1.getSubjectsById);
+subjectRouter.post('/', subjectsMidllewares_1.nameValidate, subjectsMidllewares_1.descriptionValidate, subjectControllers_1.postSubject);
+subjectRouter.put('/:id', subjectsMidllewares_1.nameValidate, subjectsMidllewares_1.descriptionValidate, subjectControllers_1.editSubject);
+subjectRouter.delete('/:id', subjectControllers_1.deleteSubject);
+exports.default = subjectRouter;
